@@ -1,0 +1,95 @@
+{% extends 'frontend/indexbase.html.twig' %} 
+
+{% block title %} {{ app.user.name }} {{app.user.surname}} Profile {% endblock %} 
+
+{% block main_content %}
+
+<div role="main" class="main">
+
+    <section class="page-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Welcome to your user panel {{ app.user.name }} {{app.user.surname}}</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="tabs tabs-vertical tabs-left">
+                    <ul class="nav nav-tabs col-sm-3">
+                        <li class="active">
+                            <a href="#profile" data-toggle="tab">My Profile</a>
+                        </li>
+                        <li>
+                            <a href="#activity" data-toggle="tab">My Activities</a>
+                        </li>
+                        <li>
+                            <a href="#comments" data-toggle="tab">My Comments</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="profile" class="tab-pane active">
+                            <p>Profile</p>
+                            <p>
+                                <table>
+                                    <tr>
+                                        <th>Name:</th>
+                                        <td> {{ app.user.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Surname:</th>
+                                        <td> {{app.user.surname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td> {{app.user.email}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Image:</th>
+                                        <td>
+                                            {% if not app.user.image %}
+                                            <span><small>You don't have a profile image. Let's add one!</small></span> {% else %}
+                                            <div class="img-thumbnail">
+                                                <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="150" width="150">
+                                            </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>
+                                            <form method="post" action="{{ path('frontend_profile_edit', {'id': app.user.id}) }}">
+                                                <input type="hidden" name="_method" value="EDIT">
+                                                <button class="btn btn-info">Edit</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                        </div>
+                        <div id="activity" class="tab-pane">
+                             {% include('frontend/activity.html.twig') %}
+                        </div>
+                        <div id="comments" class="tab-pane">
+                            {% include('frontend/user_comment.html.twig') %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %} 
+
+{% endblock %}

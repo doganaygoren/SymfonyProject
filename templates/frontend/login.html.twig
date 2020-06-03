@@ -1,0 +1,148 @@
+{% extends 'frontend/indexbase.html.twig' %} 
+{% block title %} Login || Register {% endblock %} 
+
+{% block main_content %}
+
+<div role="main" class="main">
+
+    <section class="page-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Pages</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Login</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row featured-boxes login">
+                    <div class="col-sm-6">
+                        <div class="featured-box featured-box-secundary default info-content">
+                            <div class="box-content">
+                                <h4>Existing User</h4>
+                                <form action="" method="post" role="form">
+                                    {% if error %}
+                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %} {% if app.user %}
+                                    <div class="mb-3">
+                                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                    </div>
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label for="inputEmail">Email</label>
+                                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-lg" required autofocus>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <a class="pull-right" href="#">(Lost Password?)</a>
+                                                <label for="inputPassword">Password</label>
+                                                <input type="password" name="password" id="inputPassword" class="form-control input-lg" required>
+
+                                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="remember-box checkbox">
+															<label for="rememberme">
+																<input type="checkbox" name="_remember_me" class="form-check-input"> Remember me
+															</label>
+														</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="submit" value="Login" class="btn btn-primary pull-right push-bottom" data-loading-text="Loading...">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="featured-box featured-box-secundary default info-content">
+                            <div class="box-content">
+                                <h4>Register An Account</h4>
+                                <form action="{{ path('register') }}" name="user_form" method="post" enctype="multipart/form-data">
+                                    <div id="user_form">
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="user_form_name">Name</label>
+                                                    <input type="text" id="user_form_name" name="user_form[name]" class="form-control input-lg" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="user_form_surname">Surname</label>
+                                                    <input type="text" id="user_form_surname" name="user_form[surname]" class="form-control input-lg" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label for="user_form_email" class="required">E-mail Address</label>
+                                                    <input type="email" id="user_form_email" name="user_form[email]" required="required" class="form-control input-lg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <label for="user_form_password">Password</label>
+                                                    <input type="password" id="user_form_password" name="user_form[password]" required="required" class="form-control input-lg">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="user_form_password">Re-enter Password</label>
+                                                    <input type="password" id="user_form_password" name="user_form[password]" class="form-control input-lg" required>
+                                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="hidden" name="user_form[roles]" id="user_form_roles" value="ROLE_USER">
+                                            <input type="submit" value="Register" class="btn btn-primary pull-right push-bottom" data-loading-text="Loading...">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %} 
+
+{% endblock %}

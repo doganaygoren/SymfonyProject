@@ -1,0 +1,88 @@
+{% extends 'backend/adminbase.html.twig' %}
+{% block title %} About Us Settings {% endblock %}
+{% block header %} Configuration {% endblock %}
+
+{% block main_content %}
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>About</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+           	
+          	<form method="post" action="{{ path('backend_about_update', {'id':about_list[0].id}) }}" id="about_form" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left" >
+          		<div id="about_form">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class=""><a href="#about_us" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">About Us Settings</a>
+                        </li>
+                      </ul>
+
+	                <div id="myTabContent" class="tab-content">
+                                      
+                        <div role="tabpanel" class="tab-pane fade active in" id="about_us" aria-labelledby="profile-tab">
+                      			<div class="form-group">
+                        			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="about_form_visio
+                        			">Visio</label>
+                        			<div class="col-md-6 col-sm-6 col-xs-12">
+                          				<input name="about_form[visio]" type="text" id="about_form_visio" class="form-control col-md-7 col-xs-12" value="{{ about_list[0].visio }}">
+                        			</div>
+                      			</div>
+                      			
+                      			<div class="form-group">
+                        			<label class="control-label col-md-3 col-sm-3 col-xs-12" for="about_form_mission">Mission</label>
+                        			<div class="col-md-6 col-sm-6 col-xs-12">
+                          				<input type="text" id="about_form_mission" name="about_form[mission]" class="form-control col-md-7 col-xs-12" value="{{ about_list[0].mission }}">
+                        			</div>
+                      			</div>
+
+                      			<div class="form-group">
+                        			<label for="about_form_content" class="control-label col-md-3 col-sm-3 col-xs-12">Content</label>
+                        			<div class="col-md-6 col-sm-6 col-xs-12">
+                          				<textarea name="about_form[content]" id="about_form_content" class="form-control col-md-7 col-xs-12" >{{ about_list[0].content }} </textarea>
+                        			</div>
+                      			</div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    	<input type="hidden" name="update_token" value="{{csrf_token('update_about')}}">
+   	    				<button type="submit" class="btn btn-primary">Cancel</button>
+           				<button type="submit" class="btn btn-success">Save</button>
+           			</div>
+       			</div>
+       			</div>
+       		
+            </form>
+         </div></div></div>
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+    var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+</script>
+<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    if (CKEDITOR.instances["about_form_content"]) {
+        CKEDITOR.instances["about_form_content"].destroy(true);
+        delete CKEDITOR.instances["about_form_content"];
+    }
+
+    CKEDITOR.replace("about_form_content", {
+        "uiColor": "#ffffff",
+        "language": "en"
+    });
+</script>
+
+
+{% endblock %}

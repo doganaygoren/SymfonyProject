@@ -1,0 +1,70 @@
+{% extends 'backend/adminbase.html.twig' %}
+{% block title %}Message Detail{% endblock %}
+{% block header %}Detail{% endblock %}
+
+{% block main_content %}
+
+	{% for message in message_detail %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ message.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ message.email }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ message.subject }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ message.message }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ message.status }}</td>
+            </tr>
+            <tr>
+                <th>IP Address</th>
+                <td>{{ message.ip }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ message.note }}</td>
+            </tr>
+            <tr>
+                <th>Create Time</th>
+                <td>{{ message.createdAt ? message.createdAt|date('Y-m-d H:i:s') : 'No Data' }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{{path('backend_message')}}"><button class="btn btn-warning">Back</button></a>
+                </td>
+            	<td>
+                	<form method="post" action="{{ path('backend_message_edit', {'id': message.id}) }}">
+                    	<input type="hidden" name="_method" value="EDIT">
+                        <button class="btn btn-info">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

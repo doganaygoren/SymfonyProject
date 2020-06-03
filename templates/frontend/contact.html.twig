@@ -1,0 +1,145 @@
+{% extends 'frontend/indexbase.html.twig' %}
+{% block title %} Contact {% endblock %}
+
+{% block main_content %}
+
+
+
+
+					<section class="page-top">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<ul class="breadcrumb">
+									<li><a href="{{ path('frontend_index') }}">Home</a></li>
+									<li class="active">Contact Us</li>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h1>Contact Us</h1>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<div class="container">
+
+					<div class="row">
+						<div class="col-md-6">
+							{% for label, flashes in app.session.flashbag.all %}
+								{% for flash in flashes %}
+									{% if (label=='success') %}
+									<div class="alert alert-success" id="contactSuccess">
+										<strong>Success!</strong> Your message has been sent to us.
+									</div>
+									{% else %}
+									<div class="alert alert-danger" id="contactError">
+										<strong>Error!</strong> There was an error sending your message.
+									</div>
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+							<h2 class="short"><strong>Contact</strong> Us</h2>
+							<form role="form" name="message_form" action="{{path('home_contact')}}" method="post">
+								<div id="message_form">
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<label for="message_form_name">Your name *</label>
+											<input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="message_form[name]" id="message_form_name" required>
+										</div>
+										<div class="col-md-6">
+											<label for="message_form_email">Your email address *</label>
+											<input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="message_form[email]" id="message_form_email" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12">
+											<label for="message_form_subject">Subject</label>
+											<input type="text" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="message_form[subject]" id="message_form_subject" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-12">
+											<label for="message_form_message">Message *</label>
+											<textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message_form[message]" id="message_form_message" required></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<input type="submit" value="Send Message" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+									</div>
+								</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-6">
+
+							
+							<h4>The <strong>Office</strong></h4>
+							<ul class="list-unstyled">
+								<li><i class="fa fa-map-marker"></i> <strong>Address:{{ settings[0].address }}</strong></li>
+								<li><i class="fa fa-phone"></i> <strong>Phone:{{ settings[0].phone }}</strong> </li>
+								<li><i class="fa fa-phone"></i> <strong>Fax:{{ settings[0].fax }}</strong> </li>
+								<li><i class="fa fa-envelope"></i> <strong>Email:{{ settings[0].mail }}</strong> <a href="mailto:{{ settings[0].mail }}">  </a></li>
+							</ul>
+
+							<hr />
+
+							<h4>Social Media</h4>
+							<ul class="social-icons">
+							<li class="facebook"><a href="{{ settings[0].facebook }}" target="_blank" title="Facebook">Facebook</a></li>
+							<li class="twitter"><a href="{{ settings[0].twitter }}" target="_blank" title="Twitter">Twitter</a></li>
+							<li class="instagram"><a href="{{ settings[0].instagram }}" target="_blank" title="instagram">Instagram</a></li>
+							<li class="youtube"><a href="{{ settings[0].youtube }}" target="_blank" title="youtube">Youtube</a></li>
+						</ul>
+
+						</div>
+
+					</div>
+
+				</div>
+
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+		<script src="/frontend/vendor/jquery/jquery.js"></script>
+		<script src="/frontend/vendor/jquery.appear/jquery.appear.js"></script>
+		<script src="/frontend/vendor/jquery.easing/jquery.easing.js"></script>
+		<script src="/frontend/vendor/jquery-cookie/jquery-cookie.js"></script>
+		<script src="/frontend/vendor/bootstrap/bootstrap.js"></script>
+		<script src="/frontend/vendor/common/common.js"></script>
+		<script src="/frontend/vendor/jquery.validation/jquery.validation.js"></script>
+		<script src="/frontend/vendor/jquery.stellar/jquery.stellar.js"></script>
+		<script src="/frontend/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		<script src="/frontend/vendor/jquery.gmap/jquery.gmap.js"></script>
+		<script src="/frontend/vendor/isotope/jquery.isotope.js"></script>
+		<script src="/frontend/vendor/owlcarousel/owl.carousel.js"></script>
+		<script src="/frontend/vendor/jflickrfeed/jflickrfeed.js"></script>
+		<script src="/frontend/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+		<script src="/frontend/vendor/vide/vide.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="/frontend/js/theme.js"></script>
+
+		<!-- Specific Page Vendor and Views -->
+		<script src="/frontend/js/views/view.contact.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="/frontend/js/custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="/frontend/js/theme.init.js"></script>
+{% endblock %}

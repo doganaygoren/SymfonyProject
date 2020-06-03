@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <title> {% block title %} {% endblock %}| Activity Best</title>
+    <meta name="keywords" content="{% block keywords %} {% endblock %}" />
+    <meta name="description" content="{% block description %} {% endblock %}">
+    <meta name="author" content="Doğanay Gören">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- /frontend/Vendor CSS -->
+    <link rel="stylesheet" href="/frontend/vendor/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/frontend/vendor/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/frontend/vendor/owlcarousel/owl.carousel.min.css" media="screen">
+    <link rel="stylesheet" href="/frontend/vendor/owlcarousel/owl.theme.default.min.css" media="screen">
+    <link rel="stylesheet" href="/frontend/vendor/magnific-popup/magnific-popup.css" media="screen">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="/frontend/css/theme.css">
+    <link rel="stylesheet" href="/frontend/css/theme-elements.css">
+    <link rel="stylesheet" href="/frontend/css/theme-blog.css">
+    <link rel="stylesheet" href="/frontend/css/theme-shop.css">
+    <link rel="stylesheet" href="/frontend/css/theme-animate.css">
+
+    <!-- Current Page CSS -->
+    <link rel="stylesheet" href="/frontend/vendor/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" href="/frontend/vendor/circle-flip-slideshow/css/component.css" media="screen">
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="/frontend/css/skins/default.css">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="/frontend/css/custom.css">
+
+    <!-- Head Libs -->
+    <script src="/frontend/vendor/modernizr/modernizr.js"></script>
+
+    {% block css %} {% endblock %}
+
+    <!--[if IE]>
+            <link rel="stylesheet" href="css/ie.css">
+        <![endif]-->
+
+    <!--[if lte IE 8]>
+            <script src="/frontend/vendor/respond/respond.js"></script>
+            <script src="/frontend/vendor/excanvas/excanvas.js"></script>
+        <![endif]-->
+
+</head>
+
+<body>
+    <div class="body">
+        <header id="header">
+            <div class="container">
+                <div class="logo">
+                    <a href="{{ path('frontend_index') }}">
+                        <img alt="Porto"  width="111" height="54" data-sticky-width="82" data-sticky-height="40" src="/frontend/img/logo.png">
+                    </a>
+                </div>
+                <div class="search">
+                    <form id="searchForm" action="" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control search" name="q" id="q" placeholder="Search..." required>
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                </span>
+                        </div>
+                    </form>
+                </div>
+
+                <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">f
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="navbar-collapse nav-main-collapse collapse">
+                <div class="container">
+                    <ul class="social-icons">
+                        <li class="facebook"><a href="http://www.facebook.com/" target="_blank" title="Facebook">Facebook</a></li>
+                        <li class="twitter"><a href="http://www.twitter.com/" target="_blank" title="Twitter">Twitter</a></li>
+                        <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" title="Linkedin">Linkedin</a></li>
+                    </ul>
+                    <nav class="nav-main mega-menu">
+
+                        <ul class="nav nav-pills nav-main" id="mainMenu">
+                            <li>
+                                <a href="{{ path('frontend_index') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('home_activity_list') }}">Activities</a>
+                            </li>
+                            <li>
+                                <a href="{{path('home_about')}}">About Us</a>
+                            </li>
+                            <li>
+                                <a href="{{path('home_contact')}}">Contact Us</a>
+                            </li>
+                            <!-- TODO: add an if statement to show admin panel button to admins -->
+
+                            {% if app.user %}
+
+                            <li class="dropdown mega-menu-item mega-menu-signin signin logged" id="headerAccount"><a class="dropdown-toggle extra" href="#"><i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle disabled" href="{{ path('frontend_profile') }}">
+                                    <i class="fa fa-user"></i> {{app.user.name}} {{app.user.surname}}
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="mega-menu-content">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="user-avatar">
+                                                        <div>
+                                                            <img src="{{ asset('uploads/images/' ~ app.user.image) }}" class="img-thumbnail" height="200" width="150">
+                                                        </div>
+                                                        <p><strong>{{ app.user.name }} {{ app.user.surname }}</strong></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <ul class="list-account-options">
+                                                        {% if is_granted('ROLE_ADMIN') %}
+                                                        <li>
+                                                            <a href="{{ path('backend_index') }}">Admin Panel</a>
+                                                        </li>
+                                                        {% endif %}
+                                                        <li>
+                                                            <a href="{{ path('frontend_profile') }}">My Profile</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ path('app_logout') }}">Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {% else %}
+
+                            <li class="dropdown mega-menu-item mega-menu-signin signin" id="headerAccount"><a class="dropdown-toggle extra"><i class="fa fa-angle-down"></i></a>
+                                <a class="dropdown-toggle disabled" href="{{ path('app_login') }}">
+                                    <i class="fa fa-user"></i> Sign In
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <div class="mega-menu-content">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <div class="signin-form">
+
+                                                        <span class="mega-menu-sub-title">Sign In</span>
+
+                                                        <form action="{{ path('app_login') }}" method="post" role="form">
+
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label for="inputEmail">Email</label>
+                                                                        <input type="email" name="email" id="inputEmail" class="form-control input-lg" required autofocus>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <a class="pull-right" href="#">(Lost Password?)</a>
+                                                                        <label for="inputPassword">Password</label>
+                                                                        <input type="password" name="password" id="inputPassword" class="form-control input-lg" required>
+
+                                                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <span class="remember-box checkbox">
+                                                            <label for="rememberme">
+                                                                <input type="checkbox" name="_remember_me" class="form-check-input"> Remember me
+                                                            </label>
+                                                        </span>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input type="submit" value="Login" class="btn btn-primary pull-right push-bottom" data-loading-text="Loading...">
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+                                                        <a href="{{ path('app_login') }}">
+                                                            <p class="sign-up-info">Don't have an account yet? Sign Up</p>
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        {% block main_content %} {% endblock %}
+
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-ribbon">
+                        <span>Get in Touch</span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="newsletter">
+                            <h4>Newsletter</h4>
+                            <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+
+                            <div class="alert alert-success hidden" id="newsletterSuccess">
+                                <strong>Success!</strong> You've been added to our email list.
+                            </div>
+
+                            <div class="alert alert-danger hidden" id="newsletterError"></div>
+
+                            <form id="newsletterForm" action="" method="POST">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
+                                    <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">Go!</button>
+                                        </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Latest Tweets</h4>
+                        <div id="tweet" class="twitter" data-plugin-tweets data-plugin-options='{"username": "", "count": 2}'>
+                            <p>Please wait...</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="contact-details">
+                            <h4>Contact Us</h4>
+                            <ul class="contact">
+                                <li>
+                                    <p><i class="fa fa-map-marker"></i> <strong>Address:</strong> 1234 Street Name, City Name, United States</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa fa-phone"></i> <strong>Phone:</strong> (123) 456-7890</p>
+                                </li>
+                                <li>
+                                    <p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:mail@example.com">mail@example.com</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h4>Follow Us</h4>
+                        <div class="social-icons">
+                            <ul class="social-icons">
+                                <li class="facebook"><a href="http://www.facebook.com/" target="_blank" data-placement="bottom" data-tooltip title="Facebook">Facebook</a></li>
+                                <li class="twitter"><a href="http://www.twitter.com/" target="_blank" data-placement="bottom" data-tooltip title="Twitter">Twitter</a></li>
+                                <li class="linkedin"><a href="http://www.linkedin.com/" target="_blank" data-placement="bottom" data-tooltip title="Linkedin">Linkedin</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <a href="{{ path('frontend_index') }}" class="logo">
+                                <img alt="Porto Website Template" class="img-responsive" src="/frontend/img/logo-footer.png">
+                            </a>
+                        </div>
+                        <div class="col-md-7">
+                            <p>© Copyright 2020 by Doğanay Gören. All Rights Reserved.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <nav id="sub-menu">
+                                <ul>
+                                    <li><a href="#">FAQ's</a></li>
+                                    <li><a href="#">Sitemap</a></li>
+                                    <li><a href="{{ path('home_contact') }}">Contact</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- /frontend/Vendor -->
+    <script src="/frontend/vendor/jquery/jquery.js"></script>
+    <script src="/frontend/vendor/jquery.appear/jquery.appear.js"></script>
+    <script src="/frontend/vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="/frontend/vendor/jquery-cookie/jquery-cookie.js"></script>
+    <script src="/frontend/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/frontend/vendor/common/common.js"></script>
+    <script src="/frontend/vendor/jquery.validation/jquery.validation.js"></script>
+    <script src="/frontend/vendor/jquery.stellar/jquery.stellar.js"></script>
+    <script src="/frontend/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/frontend/vendor/jquery.gmap/jquery.gmap.js"></script>
+    <script src="/frontend/vendor/isotope/jquery.isotope.js"></script>
+    <script src="/frontend/vendor/owlcarousel/owl.carousel.js"></script>
+    <script src="/frontend/vendor/jflickrfeed/jflickrfeed.js"></script>
+    <script src="/frontend/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="/frontend/vendor/vide/vide.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="/frontend/js/theme.js"></script>
+
+    <!-- Specific Page /frontend/Vendor and Views -->
+    <script src="/frontend/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="/frontend/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="/frontend/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+    <script src="/frontend/js/views/view.home.js"></script>
+
+    <!-- Theme Custom -->
+    <script src="/frontend/js/custom.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="/frontend/js/theme.init.js"></script>
+
+    {% block js %} {% endblock %}
+    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-12345678-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+         -->
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+{% extends 'backend/adminbase.html.twig' %}
+{% block title %} User Comments {% endblock %}
+{% block header %}Comment Detail {% endblock %}
+{% block main_content %}
+
+
+    <table class="table">
+        <tbody>
+            {% for comment in comment_detail %}
+            <tr>
+                <th>Id</th>
+                <td>{{ comment.id }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ comment.subject }}</td>
+            </tr>
+            <tr>
+                <th>Ip Address</th>
+                <td>{{ comment.ip }}</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>{{ comment.rate }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ comment.comment }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ comment.status }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td> <a href="{{path('backend_user')}}"> {{comment.name}} {{comment.surname}} </a> </td>
+            </tr>
+            <tr>
+                <th>Activity</th>
+                <td> <a href="{{path('backend_activity_detail', {'id':comment.id})}}"> {{comment.title}} </a></td>
+            </tr>
+            <tr>
+                <th>Create Time</th>
+                <td>{{ comment.created_at ? comment.created_at|date('Y-m-d H:i:s') : 'No Data' }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{{path('backend_comment')}}"><button class="btn btn-warning">Back</button></a>
+                </td>
+                <td>
+                    <form method="post" action="{{ path('backend_comment_edit', {'id': comment.id}) }}">
+                        <input type="hidden" name="_method" value="EDIT">
+                        <button class="btn btn-info">Edit</button>
+                    </form>
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

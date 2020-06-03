@@ -1,0 +1,181 @@
+ {% for settings in settings_list %}
+<form method="post" action="{{ path('backend_settings_update', {'id':settings.id}) }}" enctype="multipart/form-data" data-parsley-validate class="form-horizontal form-label-left" name="settings_form">
+    <div id="settings_form">
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#general_settings" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">General Settings</a>
+                </li>
+                <li role="presentation" class=""><a href="#contact_settings" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Contact Settings</a>
+                </li>
+                <li role="presentation" class=""><a href="#social_media" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Social Media</a>
+                </li>
+                <li role="presentation" class=""><a href="#google_api" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Google API</a>
+                </li>
+                <li role="presentation" class=""><a href="#mail_settings" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Mail Settings</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+
+                <div role="tabpanel" class="tab-pane fade active in" id="general_settings" aria-labelledby="home-tab">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_title">Site Title</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_title" name="settings_form[title]" type="text" id="first-name" class="form-control col-md-7 col-xs-12" value="{{ settings.title }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_keyword">Site Keywords</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="settings_form_keyword" name="settings_form[keyword]" class="form-control col-md-7 col-xs-12" value="{{ settings.keyword }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings_form_description" class="control-label col-md-3 col-sm-3 col-xs-12">Site Description</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_description" name="settings_form[description]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.description }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="contact_settings" aria-labelledby="profile-tab">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_mail">Mail</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_mail" name="settings_form[mail]" type="email" class="form-control col-md-7 col-xs-12" value="{{ settings.mail }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_phone">Phone Number</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_phone" name="settings_form[phone]" type="text" class="form-control col-md-7 col-xs-12" value="{{ settings.phone }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_mobile" class="control-label col-md-3 col-sm-3 col-xs-12">Mobile Number</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_mobile" name="settings_form[mobile]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.mobile }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_fax" class="control-label col-md-3 col-sm-3 col-xs-12">Fax Number</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_fax" name="settings_form[fax]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.fax }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_address" class="control-label col-md-3 col-sm-3 col-xs-12">Addres</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_address" name="settings_form[address]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.address }}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="social_media" aria-labelledby="profile-tab">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_facebook">Facebook</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_facebook" name="settings_form[facebook]" type="text" class="form-control col-md-7 col-xs-12" value="{{ settings.facebook }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_twitter">Twitter</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="settings_form_twitter" name="settings_form[twitter]" class="form-control col-md-7 col-xs-12" value="{{ settings.twitter }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings_form_instagram" class="control-label col-md-3 col-sm-3 col-xs-12">Instagram</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_instagram" name="settings_form[instagram]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.instagram}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_youtube" class="control-label col-md-3 col-sm-3 col-xs-12">Youtube</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_youtube" name="settings_form[youtube]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.youtube }}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="google_api" aria-labelledby="profile-tab">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_google">Google Account</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_google" name="settings_form[google]" type="text" class="form-control col-md-7 col-xs-12" value="{{ settings.google }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_recapctha">Google Recapctha</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="settings_form_recapctha" name="settings_form[recapctha]" class="form-control col-md-7 col-xs-12" value="{{ settings.recapctha }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="settings_form_map" class="control-label col-md-3 col-sm-3 col-xs-12">Google Maps</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_map" name="settings_form[map]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.map }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="mail_settings" aria-labelledby="profile-tab">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_smtp_user">SMTP Username</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_smtp_user" name="settings_form[smtp_user]" type="text" class="form-control col-md-7 col-xs-12" value="{{ settings.smtpUser }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="settings_form_smtp_password">Password</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="password" id="settings_form_smtp_password" name="settings_form[smtp_password]" class="form-control col-md-7 col-xs-12" value="{{ settings.smtpPassword }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_smtp_host" class="control-label col-md-3 col-sm-3 col-xs-12">SMTP Host</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_smtp_host" name="settings_form[smtp_host]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.smtpHost }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settings_form_smtp_port" class="control-label col-md-3 col-sm-3 col-xs-12">SMTP Port</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="settings_form_smtp_port" name="settings_form[smtp_port]" class="form-control col-md-7 col-xs-12" type="text" value="{{ settings.smtpPort }}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <form method="post">
+                <button type="submit" class="btn btn-danger">Cancel</button>
+
+                <input type="hidden" name="update_token" value="{{csrf_token('update_settings')}}">
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+</form>

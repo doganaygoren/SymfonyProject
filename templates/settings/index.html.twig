@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<title>Settings index</title>
+
+{% block body %}
+    <h1>Settings index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Keyword</th>
+                <th>Phone</th>
+                <th>Mobile</th>
+                <th>Fax</th>
+                <th>Mail</th>
+                <th>Address</th>
+                <th>Google</th>
+                <th>Recapctha</th>
+                <th>Map</th>
+                <th>Facebook</th>
+                <th>Twitter</th>
+                <th>Instagram</th>
+                <th>Youtube</th>
+                <th>Smtp_user</th>
+                <th>Smtp_password</th>
+                <th>Smtp_host</th>
+                <th>Smtp_port</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for setting in settings %}
+            <tr>
+                <td>{{ setting.id }}</td>
+                <td>{{ setting.title }}</td>
+                <td>{{ setting.description }}</td>
+                <td>{{ setting.keyword }}</td>
+                <td>{{ setting.phone }}</td>
+                <td>{{ setting.mobile }}</td>
+                <td>{{ setting.fax }}</td>
+                <td>{{ setting.mail }}</td>
+                <td>{{ setting.address }}</td>
+                <td>{{ setting.google }}</td>
+                <td>{{ setting.recapctha }}</td>
+                <td>{{ setting.map }}</td>
+                <td>{{ setting.facebook }}</td>
+                <td>{{ setting.twitter }}</td>
+                <td>{{ setting.instagram }}</td>
+                <td>{{ setting.youtube }}</td>
+                <td>{{ setting.smtpUser }}</td>
+                <td>{{ setting.smtpPassword }}</td>
+                <td>{{ setting.smtpHost }}</td>
+                <td>{{ setting.smtpPort }}</td>
+                <td>{{ setting.createdAt ? setting.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ setting.updatedAt ? setting.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('settings_show', {'id': setting.id}) }}">show</a>
+                    <a href="{{ path('settings_edit', {'id': setting.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="23">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('settings_new') }}">Create new</a>
+{% endblock %}

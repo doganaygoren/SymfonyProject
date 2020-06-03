@@ -1,0 +1,75 @@
+{% extends 'frontend/indexbase.html.twig' %}
+{% block title %} About Us {% endblock %}
+{% block main_content %}
+<div role="main" class="main">
+
+	<section class="page-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li class="active">About Us</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h1>About Us</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+				
+				<a href="/contact" class="btn btn-lg btn-primary push-top">Contact Us</a>
+			</div>
+		</div>
+
+		<hr class="tall">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="push-top">Our <strong>Visio</strong></h3>
+			</div>
+		</div>
+
+		<div class="featured-box">
+			<div class="box-content">
+				
+				<p>{{ about[0].visio }}</p>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="push-top">Our <strong>Mission</strong></h3>
+			</div>
+		</div>
+
+		<div class="featured-box">
+			<div class="box-content">
+				
+				<p>{{ about[0].mission }}</p>
+			</div>
+		</div>
+
+		<hr class="tall">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="push-top" >Our <strong>Activities</strong></h3>
+			</div>
+		</div>
+		<div class="featured-box">
+			<div class="box-content" >
+				<p> {{ about[0].content|raw }} </p>
+			</div>
+		</div>
+</div></div>
+
+{% endblock %}

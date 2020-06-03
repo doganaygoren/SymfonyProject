@@ -1,0 +1,155 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %}Edit Activity{% endblock %} 
+{% block header %}Edit Page{% endblock %} 
+
+{% block main_content %}
+<!-- enctype="multipart/form-data" kaldır normal upload için -->
+<form name="activity_form" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+    <div id="activity_form">
+        <div class="form-group">
+            <label for="activity_form_category" class="control-label col-md-3 col-sm-3 col-xs-12">Category Name </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="activity_form_category" name="activity_form[category]" class="form-control">
+
+                    {% for category in category_list %}
+                    <option value="{{category.id}}">{{ category.categoryName }} </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        {% for activity in activity_info %}
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_title">Title
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_title" name="activity_form[title]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.title }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_keyword">Keywords
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_keyword" name="activity_form[keyword]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.keyword}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="activity_form_description" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea class="resizable_textarea form-control" id="activity_form_description" name="activity_form[description]" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 54px;">{{ activity.description }}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <label for="activity_form_image" class="control-label col-md-3 col-sm-3 col-xs-12">Add New Image(s)</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {% if activity.image==null %}
+                <span><small>This activity has no images.</small></span> {% else %}
+                <img src="{{ asset('uploads/images/' ~ activity.image) }}" height="60"> {% endif %}
+                <input id="activity_form_image" name="activity_form[image]" class="form-control col-md-7 col-xs-12" type="file" multiple value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_adrenalineFactor">Adrenaline Factor
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="number" min="1" max="5" id="activity_form_adrenalineFactor" name="activity_form[adrenalineFactor]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.adrenalineFactor}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_address">Address
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_address" name="activity_form[address]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.address }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_city">City
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_city" name="activity_form[city]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.city }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_phone">Phone
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_phone" name="activity_form[phone]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.phone}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_fax">Fax
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="activity_form_fax" name="activity_form[fax]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.fax}}">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_email">Mail
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="email" id="activity_form_email" name="activity_form[email]" required="required" class="form-control col-md-7 col-xs-12" value="{{ activity.email }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activity_form_detail">Detail
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea class="form-control" id="activity_form_detail" name="activity_form[detail]">{{ activity.detail }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="activity_form_status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="activity_form_status" name="activity_form[status]">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+        {% endfor %}
+        <input type="hidden" id="activity_form__token" name="activity_form[_token]" value="{{ csrf_token('activity_edit_form') }}" />
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %}
+
+<script type="text/javascript">
+    var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+</script>
+<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    if (CKEDITOR.instances["activity_form_detail"]) {
+        CKEDITOR.instances["activity_form_detail"].destroy(true);
+        delete CKEDITOR.instances["activity_form_detail"];
+    }
+
+    CKEDITOR.replace("activity_form_detail", {
+        "uiColor": "#ffffff",
+        "language": "en"
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %}Edit Message{% endblock %} 
+{% block header %}Message Edit Page{% endblock %} 
+
+{% block main_content %}
+<form name="message_form" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+    <div id="message_form">
+        {% for message in message_info %}
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="hidden" id="message_form_name" name="message_form[name]" required="required" class="form-control col-md-7 col-xs-12" value="{{ message.name }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="hidden" id="message_form_email" name="message_form[email]" required="required" class="form-control col-md-7 col-xs-12" value="{{ message.email}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="hidden" id="message_form_subject" name="message_form[subject]" required="required" class="form-control col-md-7 col-xs-12" value="{{ message.subject }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 hidden">
+                <textarea class="form-control" id="message_form_message" name="message_form[message]">{{ message.message }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message_form_status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="message_form_status" name="message_form[status]">
+                    <option>Answered</option>
+                    <option>Will Be Answered</option>
+                    <option>Seen</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="hidden" id="message_form_ip" name="message_form[ip]" required="required" class="form-control col-md-7 col-xs-12" value="{{ message.ip }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message_form_note">Note
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="message_form_note" name="message_form[note]" required="required" class="form-control col-md-7 col-xs-12" value="{{ message.note}}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %}
+
+
+{% endblock %}

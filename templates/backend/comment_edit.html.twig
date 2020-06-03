@@ -1,0 +1,46 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %}Comment Edit{% endblock %} 
+{% block header %}Edit Page{% endblock %} 
+
+{% block main_content %}
+<form name="comment_form" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+    <div id="comment_form">
+        {% for comment in comment_info %}
+        
+            <input type="hidden" id="comment_form_subject" name="comment_form[subject]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.subject }}">
+            <input type="hidden" id="comment_form_comment" name="comment_form[comment]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.comment }}">
+            <input type="hidden" id="comment_form_ip" name="comment_form[ip]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.ip }}">
+            <input type="hidden" id="comment_form_userid" name="comment_form[userid]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.userid }}">
+            <input type="hidden" id="comment_form_rate" name="comment_form[rate]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.rate }}">
+            <input type="hidden" id="comment_form_activityid" name="comment_form[activityid]" required="required" class="form-control col-md-7 col-xs-12" value="{{ comment.activityid }}">
+
+        <div class="form-group">
+            <label for="comment_form_status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="comment_form_status" name="comment_form[status]">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+        {% endfor %}
+        <input type="hidden" id="comment_form__token" name="comment_form[_token]" value="{{ csrf_token('comment_edit_form') }}" />
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %}
+
+{% endblock %}

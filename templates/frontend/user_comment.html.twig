@@ -1,0 +1,38 @@
+<div class="x_content">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th colspan="2" style="text-align:center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comment_list %}
+                    <tr>
+                        <td>{{ comment.subject }}</td>
+                        <td>{{ comment.status }} </td>
+                        <td>
+                            <form method="post" action="{{ path('frontend_comment_detail', {'id': comment.id}) }}">
+                                <button class="btn btn-info">Detail</button>
+                            </form>
+
+                        </td>
+                        <td>
+                            <form method="post" action="{{ path('frontend_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="delete_token" value="{{csrf_token('delete_comment')}}">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>

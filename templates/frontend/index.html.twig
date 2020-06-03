@@ -1,0 +1,150 @@
+{% extends 'frontend/indexbase.html.twig' %} 
+{% block title %}{{settings[0].title}}{% endblock %} 
+{% block keywords %}{{settings[0].keyword}}{% endblock %} 
+{% block description %}{{settings[0].description}}{% endblock %} 
+
+{% block main_content %}
+
+<div role="main" class="main">
+    <div class="slider-container">
+
+        
+        <div class="slider"  id="revolutionSlider" data-plugin-revolution-slider data-plugin-options='{"startheight": 500}'>
+            <ul>
+                {% for slider in slider_list %}
+                <li data-transition="fade" data-slotamount="13" data-masterspeed="300">
+                    <a href="{{ path('home_activity', {'id':slider.id}) }}">
+                    <img style="width:1250px; height:600px;" src="{{ asset('uploads/images/' ~ slider.image) }}" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+                    </a>
+                    <div class="tp-caption top-label lfl stl" data-x="50" data-y="180" data-speed="300" data-start="500" data-easing="easeOutExpo">{{ slider.title }}</div>
+
+
+                    <div class="tp-caption main-label sft stb" data-x="50" data-y="210" data-speed="300" data-start="1500" data-easing="easeOutExpo" style="font-size:40px;" >{{ slider.description }}</div>
+
+                    <div class="tp-caption bottom-label sft stb" data-x="50" data-y="280" data-speed="500" data-start="2000" data-easing="easeOutExpo">Check out our options and features.</div>
+                </li>
+                {% endfor %}
+                <!--
+                <li data-transition="fade" data-slotamount="5" data-masterspeed="1000">
+
+                    <img src="/frontend/img/slides/slide-bg.jpg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
+
+                    <div class="tp-caption sft stb" data-x="155" data-y="100" data-speed="600" data-start="100" data-easing="easeOutExpo"><img src="/frontend/img/slides/slide-concept.png" alt=""></div>
+
+                    <div class="tp-caption blackboard-text sft stb" data-x="285" data-y="180" data-speed="900" data-start="1000" data-easing="easeOutExpo" style="font-size: 30px;">easy to</div>
+
+                    <div class="tp-caption blackboard-text sft stb" data-x="285" data-y="220" data-speed="900" data-start="1200" data-easing="easeOutExpo" style="font-size: 40px;">customize!</div>
+
+                    <div class="tp-caption main-label sft stb" data-x="685" data-y="190" data-speed="300" data-start="900" data-easing="easeOutExpo">DESIGN IT!</div>
+
+                    <div class="tp-caption bottom-label sft stb" data-x="685" data-y="250" data-speed="500" data-start="2000" data-easing="easeOutExpo">Create slides with brushes and fonts.</div>
+
+                </li>
+            -->
+            </ul>
+        </div>
+        
+    </div>
+    <div class="home-intro" id="home-intro">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <p>
+                        The fastest way to grow your business with the leader in <em>Technology</em>
+                        <span>Check out our options and features included.</span>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="get-started">
+                        <a href="#" class="btn btn-lg btn-primary">Get Started Now!</a>
+                        <div class="learn-more">or <a href="#">learn more.</a></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row center">
+            <div class="col-md-12">
+                <h1 class="short word-rotator-title">
+								Porto is
+								<strong class="inverted">
+									<span class="word-rotate" data-plugin-options='{"delay": 2000, "animDelay": 300}'>
+										<span class="word-rotate-items">
+											<span>incredibly</span>
+											<span>especially</span>
+											<span>extremely</span>
+										</span>
+									</span>
+								</strong>
+								beautiful and fully responsive.
+							</h1>
+                <p class="featured lead">
+                    Not like the others you experience. The difference is within our experie
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="home-concept">
+        <div class="container">
+
+            <div class="row center">
+                <span class="sun"></span>
+                <span class="cloud"></span>
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="process-image" data-appear-animation="bounceIn">
+                        <img src="{{ asset('uploads/images/' ~ sub_list[0].image) }}" height="145" width="145" alt="" />
+                        <strong>Find</strong>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="process-image" data-appear-animation="bounceIn" data-appear-animation-delay="200">
+                        <img src="{{ asset('uploads/images/' ~ sub_list[1].image) }}" height="145" width="145" alt="" />
+                        <strong>The Best</strong>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="process-image" data-appear-animation="bounceIn" data-appear-animation-delay="400">
+                        <img src="{{ asset('uploads/images/' ~ sub_list[2].image) }}" height="145" width="145" alt="" />
+                        <strong>With</strong>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <div class="project-image">
+                        <div id="fcSlideshow" class="fc-slideshow">
+                            <ul class="fc-slides">
+                                {% for sub_list_image in sub_list %}
+                                <li>
+                                    <a href="{{ path('home_activity', {'id':sub_list_image.id}) }}"><img class="img-responsive"
+                                    style="height:338px; width338px;" src="{{ asset('uploads/images/' ~ sub_list_image.image) }}"  /></a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <strong class="our-work">Our Activities</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+</div>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %} 
+
+{% endblock %}

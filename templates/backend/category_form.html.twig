@@ -1,0 +1,62 @@
+<form name="category_form" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+    <div id="category_form">
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_form_category_name">Category Name
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="category_form_category_name" name="category_form[category_name]" class="form-control col-md-7 col-xs-12">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category_form_upper_category" class="control-label col-md-3 col-sm-3 col-xs-12">Parent Category
+                <br><span><small>Only Main Categories are shown.</small></span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="category_form_upper_category" class="form-control" id="upper_category" name="category_form[upper_category]">
+                    <option value="0">New Main Category</option>
+
+                    {% for category in category_list %}
+                    <option value="{{category.id}}">{{ category.categoryName }} </option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_form_keywords">Keywords
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="category_form_keywords" name="category_form[keywords]" required="required" class="form-control col-md-7 col-xs-12">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category_form_description" class="control-label col-md-3 col-sm-3 col-xs-12">Description</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <textarea class="resizable_textarea form-control" id="category_form_description" name="category_form[description]" style="overflow: hidden; overflow-wrap: break-word; resize: horizontal; height: 54px;"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category_form_image" class="control-label col-md-3 col-sm-3 col-xs-12">Add New Image(s)</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="category_form_image" name="category_form[image]" class="form-control col-md-7 col-xs-12" type="file" multiple value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="category_form_status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="category_form_status" name="category_form[status]">
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+        <input type="hidden" id="category_form__token" name="category_form[_token]" value="{{ csrf_token('category_add_form') }}" />
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>

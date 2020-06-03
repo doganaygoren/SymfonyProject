@@ -1,0 +1,54 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %} Add New Activity {% endblock %} 
+{% block header %} New Activity {% endblock %} 
+
+{% block main_content %}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>New Activity</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="x_content">
+                {% include('backend/activity_form.html.twig') %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %}
+
+<script type="text/javascript">
+    var CKEDITOR_BASEPATH = "/bundles/fosckeditor/";
+</script>
+<script type="text/javascript" src="/bundles/fosckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    if (CKEDITOR.instances["activity_form_detail"]) {
+        CKEDITOR.instances["activity_form_detail"].destroy(true);
+        delete CKEDITOR.instances["activity_form_detail"];
+    }
+
+    CKEDITOR.replace("activity_form_detail", {
+        "uiColor": "#ffffff",
+        "language": "en"
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        autosize($('.resizable_textarea'));
+    });
+</script>
+<!-- Autosize -->
+<script src="/backend/vendors/autosize/dist/autosize.min.js"></script>
+
+{% endblock %}

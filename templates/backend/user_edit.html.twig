@@ -1,0 +1,94 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %}Edit User{% endblock %} 
+{% block header %}Edit Page{% endblock %} 
+
+{% block main_content %}
+
+<!-- enctype="multipart/form-data" kaldır normal upload için -->
+<form name="user_form" method="post" enctype="multipart/form-data" class="form-horizontal form-label-left">
+    <div id="user_form">
+        {% for user in user_info %}
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_form_name"> Name
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="user_form_name" name="user_form[name]" required="required" class="form-control col-md-7 col-xs-12" value="{{ user.name }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_form_surname">Surname
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="user_form_surname" name="user_form[surname]" required="required" class="form-control col-md-7 col-xs-12" value="{{ user.surname }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_form_email">Mail
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="email" id="user_form_email" name="user_form[email]" required="required" class="form-control col-md-7 col-xs-12" value="{{ user.email }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_form_password">Password
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" id="user_form_password" name="user_form[password]" required="required" class="form-control col-md-7 col-xs-12" value="{{ user.password }}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_form_roles" class="control-label col-md-3 col-sm-3 col-xs-12">Role</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <span><small> The user has the roles: {{ user.roles ? user.roles|json_encode : '' }}</small></span>
+                <select class="form-control" id="user_form_roles" name="user_form[roles]">
+                    <option value="ROLE_ADMIN">Admin</option>
+                    <option value="ROLE_USER">User</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_form_image" class="control-label col-md-3 col-sm-3 col-xs-12">Add New Image</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                {% if user.image==null %}
+                <span><small>This user has no images.</small></span> {% else %}
+                <img src="{{ asset('uploads/images/' ~ user.image) }}" height="60"> {% endif %}
+                <input id="user_form_image" name="user_form[image]" class="form-control col-md-7 col-xs-12" type="file" multiple value="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_form_status" class="control-label col-md-3 col-sm-3 col-xs-12">Status</label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <select class="form-control" id="user_form_status" name="user_form[status]">
+                    <option selected>{{ user.status }}</option>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+            </div>
+        </div>
+        {% endfor %}
+        <input type="hidden" id="user_form__token" name="user_form[_token]" value="{{ csrf_token('user_edit_form') }}" />
+    </div>
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %} 
+
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %} 
+
+{% endblock %}

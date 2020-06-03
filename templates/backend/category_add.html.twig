@@ -1,0 +1,45 @@
+{% extends 'backend/adminbase.html.twig' %}
+
+{% block title %}Add New Category {% endblock %}
+{% block header %} Configure Categories {% endblock %}
+  
+{% block main_content %}
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                	<div class="x_title">
+                    <h2>New Category</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="x_content">
+                        {% include('backend/category_form.html.twig') %}
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+          </div>
+{% endblock %}
+
+{% block css %}
+
+  <!-- Bootstrap -->
+    <link href="/backend/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <!-- Custom Theme Style -->
+    <link href="/backend/build/css/custom.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+      $(document).ready(function() {
+        autosize($('.resizable_textarea'));
+      });
+    </script>
+    <!-- Autosize -->
+    <script src="/backend/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- Custom Theme Scripts -->
+{% endblock %}

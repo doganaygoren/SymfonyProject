@@ -1,0 +1,97 @@
+{% extends 'backend/adminbase.html.twig' %} 
+{% block title %}Activities{% endblock %} 
+{% block header %} Available Activities {% endblock %} 
+
+{% block main_content %}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Activity List</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            <a href="{{ path('backend_activity_add') }}" class="btn btn-warning">Create New Activity</a>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Adrenaline Factor</th>
+                        <th>City</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Gallery</th>
+                        <th colspan="3" style="text-align:center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activities %}
+                    <tr>
+                        <td>{{ activity.id }}</td>
+                        <td>{{ activity.title }}</td>
+                        <td>
+                            {% if activity.image==null %}
+                            <a href="{{ path('backend_activity_edit', {'id':activity.id}) }}"><small class="btn btn-info">Add an image</small></a> {% else %}
+                            <img src="{{ asset('uploads/images/' ~ activity.image) }}" height="40"> {% endif %}
+
+                        </td>
+                        <td>{{ activity.adrenalineFactor }}</td>
+                        <td>{{ activity.city }}</td>
+                        <td>{{ activity.email }}</td>
+                        <td>{{ activity.status }} </td>
+                        <td>
+                            <a href=" javascript:openWin('{{ path('backend_image_add',{'id': activity.id}) }}','' , 'toolbar=no, location=no,directories=no, status=no, top=50, left=100, menuBar=no, scrollBars=yes, resizable=no, width=900, height=700'); "><img src="{{ asset('images/') }}/gallery.png" height="32"></a>
+                        </td>
+                        <td>
+                            <form method="post" action="{{ path('backend_activity_detail', {'id': activity.id}) }}">
+                                <button class="btn btn-info">Detail</button>
+                            </form>
+
+                        </td>
+
+                        <td>
+                            <form method="post" action="{{ path('backend_activity_edit', {'id': activity.id}) }}">
+                                <input type="hidden" name="_method" value="EDIT">
+                                <button class="btn btn-info">Edit</button>
+                            </form>
+
+                        </td>
+                        <td>
+                            <form method="post" action="{{ path('backend_activity_delete', {'id': activity.id}) }}" onsubmit="return confirm('Are you sure you want to delete this activity?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="delete_token" value="{{csrf_token('delete_activity')}}">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %} 
+{% block css %} 
+
+{% endblock %} 
+
+{% block js %}
+
+<script language="JavaScript" type="text/javascript">
+    function openWin(windowURL, windowName, windowFeatures) {
+
+        window.open(windowURL, windowName, windowFeatures);
+    }
+</script>
+
+{% endblock %}

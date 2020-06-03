@@ -1,0 +1,218 @@
+{% extends 'frontend/indexbase.html.twig' %}
+{% block title %} {{activities[0].title}} {% endblock %}
+{% block keywords %} {{activities[0].keyword}}{% endblock %}
+{% block description %} {{activities[0].description}}{% endblock %}
+{% block main_content %}
+
+<div role="main" class="main">
+
+                <section class="page-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="breadcrumb">
+                                    <li><a href="{{ path('frontend_index') }}">Home</a></li>
+                                    <li class="active">Activities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>{{ activity[0].title }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="blog-posts single-post">
+
+                                <article class="post post-large blog-single-post">
+                                    <div class="post-image">
+                                        <div class="owl-carousel" data-plugin-options='{"items":1}'>
+                                            {% for image in image_list %}
+                                            <div>
+                                                <div class="img-thumbnail">
+                                                    <img class="img-responsive" style="height:500px; width:1280px;" src="{{ asset('uploads/images/' ~ image.image) }}" alt="">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="post-date">
+                                        <span class="day">10</span>
+                                        <span class="month">Jan</span>
+                                    </div>
+                                    <div class="post-content">
+
+                                        <h2><a href="#">{{activity[0].title}}</a></h2>
+
+                                        <div class="post-meta">
+                                            <span><i class="fa fa-user"></i> By <a href="#"></a> </span>
+                                            <span><i class="fa fa-tag"></i> <a href="#">{{ activity[0].keyword }}</a> </span>
+                                            <span><i class="fa fa-comments"></i> <a href="#"></a></span>
+                                        </div>
+
+                                        <p> {{ activity[0].detail|raw }}</p>
+                                        
+                                        <div class="post-block post-comments clearfix">
+                                            <h3><i class="fa fa-comments"></i>Comments</h3>
+
+                                            {% for comment in comments %}
+                                            <ul class="comments">
+                                                <li>
+                                                    <div class="comment">
+                                                        <div class="img-thumbnail">
+                                                            <img class="avatar" alt="" src="{{ asset('uploads/images/' ~ user_comment[0].image) }}">
+                                                        </div>
+                                                        <div class="comment-block">
+                                                            <div class="comment-arrow"></div>
+                                                            <span class="comment-by">
+                                                                <strong>{{ user_comment[0].name }} {{user_comment[0].surname}}</strong>
+                                                            </span>
+                                                            <p>{{ comment.comment }}</p>
+                                                            <span class="date pull-right">User Rate:{{comment.rate}}
+                                                                {{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : 'No Date Detail' }}</span>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            
+                                            {% else %}
+                                                {% if app.user %}
+                                                    <strong>There is no comment in this activity. If you commented and can not see your comment please wait for your comment to be approved.</strong>
+                                                {% else %}
+                                                <strong>There is no comment in this activity. <a href="{{ path('app_login') }}"> Sign in from here</a> and be first one to comment in this activity! </strong>
+                                                {% endif %}
+                                                {% endfor %}
+                                        </div>
+                                        {% if app.user %}
+                                        <div class="post-block post-leave-comment">
+                                            <h3>Leave a comment</h3>
+
+                                            <form name="comment_form" action="" method="post">
+                                                <div id="comment_form">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-6">
+                                                            <label for="comment_form_subject">Subject *</label>
+                                                            <input type="text" maxlength="100" class="form-control" name="comment_form[subject]" id="comment_form_subject">
+                                                        </div>
+                                                        
+                                                        <div class="col-md-6">
+                                                            <label for="comment_form_rate">Rate *</label>
+                                                            <select class="form-control" name="comment_form[rate]" id="comment_form_rate">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label for="comment_form_comment">Comment *</label>
+                                                            <textarea maxlength="5000" rows="10" class="form-control" name="comment_form[comment]" id="comment_form_comment"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" value="Post Comment" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </article>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <aside class="sidebar">
+
+                                <table class="table">
+        <tbody>
+            {% for activity in activities %}
+            <tr>
+                <th>Title</th>
+                <td>{{ activity.title }}</td>
+            </tr>
+            <tr>
+                <th>Main Image</th>
+                <td><img src="{{ asset('uploads/images/' ~ activity.image) }}" height="80"></td>
+            </tr>
+            <tr>
+                <th>Adrenaline Factor</th>
+                <td>{{ activity.adrenalineFactor }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ activity.address }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ activity.city }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ activity.phone }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ activity.fax }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ activity.email }}</td>
+            </tr>
+            <tr>
+                <th>Image Gallery</th>
+                <td>
+                    <a href=" javascript:openWin('{{ path('home_activity_image',{'id': activity.id}) }}','' , 'toolbar=no, location=no,directories=no, status=no, top=50, left=100, menuBar=no, scrollBars=yes, resizable=no, width=900, height=700'); "><img src="{{ asset('images/') }}/gallery.png" height="32"></a>
+                </td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+                                
+                            </aside>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+ <script language="JavaScript" type="text/javascript">
+    function openWin(windowURL, windowName, windowFeatures) {
+
+        window.open(windowURL, windowName, windowFeatures);
+    }
+</script>
+
+{% endblock %}

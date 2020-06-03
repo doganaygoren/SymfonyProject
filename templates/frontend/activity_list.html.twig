@@ -1,0 +1,92 @@
+{% extends 'frontend/indexbase.html.twig' %}
+{% block title %} Activities {% endblock %}
+
+{% block main_content %}
+
+            <div role="main" class="main">
+
+                <section class="page-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <ul class="breadcrumb">
+                                    <li><a href="{{ path('frontend_index') }}">Home</a></li>
+                                    <li class="active">Activities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Activity List</h1>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="blog-posts">
+
+                                {% for activity in activities %}
+                                <article class="post post-medium">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="post-image">
+                                                <div class="owl-carousel" data-plugin-options='{"items":1}'>
+                                                    <div>
+                                                        <div class="img-thumbnail">
+                                                            <a href="{{ path('home_activity', {'id':activity.id}) }}"><img class="img-responsive" height="500" width="1280" src="{{ asset('uploads/images/' ~ activity.image) }}" alt=""></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="post-content">
+
+                                                <h2><a href="{{ path('home_activity', {'id':activity.id}) }}">{{ activity.title }}</a></h2>
+                                                <p>{{ activity.description }}</p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="post-meta">
+                                                <span><i class="fa fa-calendar"></i> January 10, 2013 </span>
+                                                <span><i class="fa fa-tag"></i> <a href="#">{{ activity.keyword }}</a> </span>
+                                                <a href="{{ path('home_activity', {'id':activity.id}) }}" class="btn btn-xl btn-primary pull-right">Read more...</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </article>
+                            {% endfor %}
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                </div>
+
+            </div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+<script language="JavaScript" type="text/javascript">
+    function openWin(windowURL, windowName, windowFeatures) {
+
+        window.open(windowURL, windowName, windowFeatures);
+    }
+</script>
+{% endblock %}

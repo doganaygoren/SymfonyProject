@@ -1,0 +1,96 @@
+{% extends 'backend/adminbase.html.twig' %}
+{% block title %}Activity Detail{% endblock %}
+{% block header %}Detail{% endblock %}
+
+{% block main_content %}
+
+	{% for activity in activities %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activity.id }}</td>
+            </tr>
+            <tr>
+                <th>Activity Name</th>
+                <td>{{ activity.title }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ activity.keyword }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ activity.description }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                	{% if activity.image==null %}
+                            <a href="{{ path('backend_activity_edit', {'id':activity.id}) }}"><small class="btn btn-info">Add an image</small></a> 
+                    {% else %}
+                            <img src="{{ asset('uploads/images/' ~ activity.image) }}" height="40"> 
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Adrenaline Factor</th>
+                <td>{{ activity.adrenalineFactor }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ activity.address }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ activity.phone }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ activity.fax }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ activity.email }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ activity.city }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ activity.status }}</td>
+            </tr>
+            <tr>
+                <th>Detail</th>
+                <td>{{ activity.detail|raw }}</td>
+            </tr>
+            <tr>
+                <th>User ID</th>
+                <td>{{ activity.userid }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="{{path('backend_activity')}}"><button class="btn btn-warning">Back</button></a>
+                </td>
+            	<td>
+                	<form method="post" action="{{ path('backend_activity_edit', {'id': activity.id}) }}">
+                    	<input type="hidden" name="_method" value="EDIT">
+                        <button class="btn btn-info">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
